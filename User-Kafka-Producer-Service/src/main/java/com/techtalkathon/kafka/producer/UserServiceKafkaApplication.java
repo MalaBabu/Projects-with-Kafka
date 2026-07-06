@@ -1,4 +1,4 @@
-package com.techtalkathon.kafka;
+package com.techtalkathon.kafka.producer;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
