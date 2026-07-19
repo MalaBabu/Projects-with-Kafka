@@ -16,7 +16,14 @@ public class UserConsumerKafkaService {
 	@KafkaListener(topics = "user-topic", groupId = "user-consumer")
 	public User getUserMessage(User user) {
 		this.user=user;
-		log.info("Received User Topic with userId={} ----> {}",user.getUserId(), user);
+		log.info("user-topic --> Received User Topic with userId={} ----> {}",user.getUserId(), user);
+		return user;
+	}
+	
+	@KafkaListener(topics = "user-topic2", groupId = "user-consumer")
+	public User getUserMessage2(User user) {
+		this.user=user;
+		log.info("user-topic2 --> Received User Topic with userId={} ----> {}",user.getUserId(), user);
 		return user;
 	}
 	
