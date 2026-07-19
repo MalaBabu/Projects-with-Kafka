@@ -1,5 +1,6 @@
 package com.techtalkathon.kafka.consumer.service;
 
+import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
 
@@ -21,9 +22,24 @@ public class UserConsumerKafkaService {
 	}
 	
 	@KafkaListener(topics = "user-topic2", groupId = "user-consumer")
-	public User getUserMessage2(User user) {
-		this.user=user;
+	public User getUserMessage2(ConsumerRecord<String, User> record) {
+		this.user=record.value();
 		log.info("user-topic2 --> Received User Topic with userId={} ----> {}",user.getUserId(), user);
+		
+		log.info("""
+	            Topic      : {}
+	            Partition  : {}
+	            Offset     : {}
+	            Key        : {}
+	            User       : {}
+	            """,
+	            record.topic(),
+	            record.partition(),
+	            record.offset(),
+	            record.key(),
+	            user);
+		
+		
 		return user;
 	}
 	
